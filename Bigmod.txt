@@ -1,0 +1,13 @@
+int bigmod(int a,int b,int m)
+{
+    if(b==0)return 1;
+    if(b%2==0)
+    {
+        ll x = (bigmod(a,b/2,m)%m);
+        return (x*x)%m;
+    }
+    else{
+        ll x = ((bigmod(a,b-1,m)%m)*(a%m))%m;
+        return x;
+    }
+}
