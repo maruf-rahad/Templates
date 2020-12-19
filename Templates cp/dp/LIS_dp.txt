@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+int mem[100];
+int ara[100];
+
+int f(int i,int n)
+{
+    if(mem[i]!=-1)
+    {
+        return mem[i];
+    }
+
+    int ans = 0;
+
+    for(int j=i+1;j<=n;j++)
+    {
+        if(ara[i]<ara[j])
+        {
+            int xx = f(j,n);
+            ans = max(ans,xx);
+        }
+    }
+    mem[i] = ans+1;
+    return mem[i];
+}
+
+int call(int n)
+{
+    int ans = -1;
+    for(int i=1;i<=n;i++)
+    {
+        int xx = f(i,n);
+        ans = max(ans,xx);
+    }
+    printf("ans %d\n",ans);
+}
+
+int main()
+{
+    int n,i;
+
+    while(scanf("%d",&n)==1)
+    {
+        for(i=1;i<=n;i++)
+        {
+            scanf("%d",&ara[i]);
+            mem[i] = -1;
+        }
+        call(n);
+
+        for(i=1;i<=n;i++)printf("%d ",mem[i]);
+
+        printf("\n");
+    }
+
+return 0;
+}

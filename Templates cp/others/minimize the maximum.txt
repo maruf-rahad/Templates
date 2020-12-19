@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int ara[1010];
+ 
+bool check(int x,int n,int m)
+{
+    int sum = 0;
+    int cnt = 0;
+    for(int i=1;i<=n;i++)
+    {
+        if(sum+ara[i]<=x)
+        {
+            sum+=ara[i];
+        }
+        else{
+            sum = ara[i];
+            cnt++;
+        }
+    }
+    cnt++;
+    if(cnt>m)return false;
+ 
+    return true;
+}
+int binary_searchh(int low,int high,int n,int m)
+{
+    int ans;
+    while(low<=high)
+    {
+        int mid = (low+high)/2;
+ 
+        if(check(mid,n,m))
+        {
+            ans = mid;
+            high = mid-1;
+        }
+        else{
+            low = mid+1;
+        }
+    }
+    return ans;
+}
+ 
+int main()
+{
+    int t,n,m,a,b,i,j,x,y,flag,sum,mx,k=0;
+ 
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d %d",&n,&m);
+        sum = 0;
+        mx = -9;
+        for(i=1;i<=n;i++)
+        {
+            scanf("%d",&ara[i]);
+            sum+=ara[i];
+            mx = max(mx,ara[i]);
+        }
+        x = binary_searchh(mx,sum,n,m);
+ 
+        printf("Case %d: %d\n",++k,x);
+ 
+    }
+return 0;
+}
+ 

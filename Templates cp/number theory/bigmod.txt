@@ -1,0 +1,11 @@
+ll mod = 1e9+7;
+ll bigmod(ll n,ll m)
+{
+    if(m==0)return 1;
+    if(m%2==0)
+    {
+        ll ret = bigmod(n,m/2);
+        return ((ret%mod)*(ret%mod))%mod;
+    }
+    else return ((n%mod)*(bigmod(n,m-1)%mod))%mod;
+}

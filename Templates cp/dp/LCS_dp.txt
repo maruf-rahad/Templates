@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+int mem[100][100];
+string s,s2;
+int lcs(int i,int j,int n,int m)
+{
+    if(i==n||j==m)
+    {
+        return 0;
+    }
+
+    if(mem[i][j]!=-1)
+    {
+        return mem[i][j];
+    }
+    int ans = 0;
+    if(s[i]==s2[j])
+    {
+        ans = lcs(i+1,j+1,n,m) + 1;
+    }
+    else
+    {
+        int val = lcs(i+1,j,n,m);
+        int val2 = lcs(i,j+1,n,m);
+        ans = max(val,val2);
+    }
+    mem[i][j] = ans;
+    return mem[i][j];
+}
+
+int main()
+{
+    int n,m,a,b,i,j,x,y,ans;
+    while(cin>>s>>s2)
+    {
+        n = s.size();
+        m = s2.size();
+
+        for(i=0;i<=n+5;i++)
+            for(j=0;j<=m+5;j++)
+                mem[i][j] = -1;
+
+        ans = lcs(0,0,n,m);
+        printf("%d\n",ans);
+    }
+
+return 0;
+}
